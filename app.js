@@ -1,3 +1,6 @@
+// NOTE: ensure .env variables are present in process.env
+require('dotenv').config()
+
 const createError = require('http-errors')
 const express = require('express')
 const path = require('path')
