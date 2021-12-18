@@ -17,4 +17,6 @@ async function ensureAuthentication(req, _res, next) {
   next()
 }
 
-module.exports = ensureAuthentication
+module.exports = {
+  ensureAuthentication,
+}

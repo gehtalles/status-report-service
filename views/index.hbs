@@ -1,2 +1,17 @@
 <h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+{{#if job_id}}
+<p>Generating Report</p>
+<script>
+  (function (window) {
+    window.location.href = '/jobs/' + '{{job_id}}'
+  }(window))
+</script>
+{{/if}}
+{{#if statusReport}}
+  <script>
+    (function (window) {
+      window.WSD_APP_STATE = window.WSD_APP_STATE || {}
+      window.WSD_APP_STATE.statusReport = JSON.parse({{{statusReport}}})
+    }(window))
+  </script>
+{{/if}}

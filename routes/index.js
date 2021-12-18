@@ -1,10 +1,34 @@
 const express = require('express')
 const router = express.Router()
+const { ensureAuthentication } = require('../middlewares/authentication')
+const {
+  enqueueStatusReportJob,
+  preloadStatusReport,
+} = require('../middlewares/status-report')
 
-/* GET home page. */
-router.get('/', function (req, res, _next) {
-  console.log(req.private.access_token)
-  res.render('index', { title: 'Express' })
-})
+router.get(
+  '/',
+  ensureAuthentication,
+  enqueueStatusReportJob,
+  ({ locals }, res, _next) => {
+    const {
+      job: { job_id },
+    } = locals
+    res.render('index', { title: 'ready', job_id })
+  },
+)
+
+router.get(
+  '/jobs/:job_id',
+  ensureAuthentication,
+  preloadStatusReport,
+  ({ locals }, res, _next) => {
+    const { statusReport: statusReport } = locals
+    res.render('index', {
+      statusReport: JSON.stringify(statusReport),
+      title: 'fetched report',
+    })
+  },
+)
 
 module.exports = router
