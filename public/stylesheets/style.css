@@ -1,8 +1,23 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+body > main {
+  flex: 1;
+}
+
+main > .container {
+  margin-top: 48px;
 }
 
 a {
-  color: #00B7FF;
+  color: #00b7ff;
+}
+.c-loading {
+  display: grid;
+  place-items: center;
+  height: 100%;
 }

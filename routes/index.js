@@ -24,7 +24,7 @@ router.get(
   preloadStatusReport,
   ({ locals }, res, _next) => {
     const { statusReport: statusReport } = locals
-    res.render('index', {
+    res.render('job_detail', {
       statusReport: JSON.stringify(statusReport),
       title: 'fetched report',
     })

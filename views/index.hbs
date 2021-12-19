@@ -1,17 +1,10 @@
-<h1>{{title}}</h1>
-{{#if job_id}}
-<p>Generating Report</p>
-<script>
-  (function (window) {
-    window.location.href = '/jobs/' + '{{job_id}}'
-  }(window))
-</script>
-{{/if}}
-{{#if statusReport}}
+<main>
+  <div class="c-loading">
+    <div class="d-flex align-items-center flex-column">
+      <div class="spinner-grow text-info flex-shrink-0" style="width: 10rem; height: 10rem;" role="status"> </div>
+      <p class="lead mt-5">Generating Report...</small>
+    </div>
   <script>
-    (function (window) {
-      window.WSD_APP_STATE = window.WSD_APP_STATE || {}
-      window.WSD_APP_STATE.statusReport = JSON.parse({{{statusReport}}})
-    }(window))
+    window.location.href = '/jobs/' + '{{job_id}}'
   </script>
-{{/if}}
+</main>

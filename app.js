@@ -7,9 +7,11 @@ const path = require('path')
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 const indexRouter = require('./routes/index')
+const hbs = require('hbs')
 const app = express()
 
 // view engine setup
+hbs.registerPartials(__dirname + '/views/partials')
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'hbs')
 
