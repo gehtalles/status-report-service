@@ -16,8 +16,58 @@ main > .container {
 a {
   color: #00b7ff;
 }
+[data-trigger] {
+  cursor: pointer;
+}
 .c-loading {
   display: grid;
   place-items: center;
   height: 100%;
+}
+
+.c-overall-stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+}
+.c-overall-stats__item {
+  flex: 1 1 calc(50% - 10px);
+  margin: 5px;
+}
+.c-overall-stats__item {
+  border-bottom: 10px solid;
+  border-top: 1px solid rgba(0, 0, 0, 0.25);
+  border-left: 1px solid rgba(0, 0, 0, 0.25);
+  border-right: 1px solid rgba(0, 0, 0, 0.25);
+  border-color: currentColor;
+  opacity: 0.5;
+  text-decoration: line-through;
+}
+.c-overall-stats__item:hover,
+.c-overall-stats__item:focus {
+  opacity: 0.75;
+}
+.is-active.c-overall-stats__item {
+  opacity: 1;
+  text-decoration: none;
+}
+.c-overall-stats__item[data-status-code='200'] {
+  color: #198754;
+}
+.c-overall-stats__item[data-status-code='501'] {
+  color: #ffc107;
+}
+
+.c-overall-stats__item[data-status-code='500'] {
+  color: #dc3545;
+}
+
+.c-chart {
+  margin-left: auto;
+  max-width: 480px;
+  width: 100%;
+}
+.c-reports-table {
+  table-layout: fixed;
 }
