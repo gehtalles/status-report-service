@@ -1,16 +1,54 @@
 <main>
-    <div class="container">
-        <h3 class="display-4">Overview</h3>
-    </div>
-    <div class="container">
-        <h3 class="display-5">Report Details</h3>
-    </div>
-    {{#if statusReport}}
-        <script>
-            window.WSD_APP_STATE = window.WSD_APP_STATE || {}
-            window.WSD_APP_STATE.statusReport = {{{statusReport}}}
-        </script>
-    {{else}}
-        <h3 class="display-4 text-danger">Error happend!</h3>
-    {{/if}}
+    <article class="container">
+        <header>
+            <h2 class="display-5">Overview</h2>
+        </header>
+        <div class="d-flex mt-3">
+            <div class="c-overall-stats align-self-end">
+                {{#each stats}}
+                <div
+                    class="is-active c-overall-stats__item c-overall-stats__item--{{@key}} p-3"
+                    data-index={{@index}}
+                    data-status-code={{@key}}
+                    data-trigger
+                    >
+                    <span class="display-4">{{this}}</span>
+                    <p class="lead text-uppercase">    {{lookup ../labels @key}}</p>
+                </div>
+                {{/each}}
+            </div>
+            <div class="c-chart">
+                <canvas id="pie-chart"></canvas>
+                <script>
+                    window.WSD_APP_STATE = window.WSD_APP_STATE || {}
+                    window.WSD_APP_STATE.pieChartData = {{{pieChartData}}}
+                </script>
+            </div>
+        </div>
+    </article>
+    <article class="container">
+    {{#if reports}}
+        <table class="c-reports-table table">
+            <thead>
+                <tr>
+                    <th scope="col" style="width: 30%">Name</th>
+                    <th scope="col" style="width: 50%">Status Message</th>
+                    <th scope="col" style="width: 10%">Code</th>
+                    <th scope="col" style="width: 10%">Alerts</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each reports}}
+                <tr data-status-code={{status_code}}>
+                    <td>{{ host.name }}</td>
+                    <td>{{ status_text }}</td>
+                    <td>{{ status_code }}</td>
+                    <td>{{ total_alerts }}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        {{/if}}
+    </article>
+    <script defer src="/javascripts/job_detail.js"></script>
 </main>

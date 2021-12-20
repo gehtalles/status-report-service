@@ -6,6 +6,16 @@ const {
   preloadStatusReport,
 } = require('../middlewares/status-report')
 
+const computeStatsFromReports = require('./index/compute-stats-from-reports.js')
+
+const STATUS_CODE_LABELS = {
+  200: 'Healthy',
+  403: 'Authorization',
+  500: 'Failures',
+  501: 'Unknown Status',
+  ECONNREFUSED: 'Disconnected',
+}
+
 router.get(
   '/',
   ensureAuthentication,
@@ -24,9 +34,14 @@ router.get(
   preloadStatusReport,
   ({ locals }, res, _next) => {
     const { statusReport: statusReport } = locals
+    const { stats, reports } = computeStatsFromReports(statusReport)
+    const labels = STATUS_CODE_LABELS
+
     res.render('job_detail', {
-      statusReport: JSON.stringify(statusReport),
-      title: 'fetched report',
+      pieChartData: JSON.stringify({ stats, labels }),
+      stats,
+      reports,
+      labels,
     })
   },
 )
