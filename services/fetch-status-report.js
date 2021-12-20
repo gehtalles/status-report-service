@@ -38,10 +38,10 @@ async function fetchStatusReport({ job_id, token }) {
         throw new Error('Job not ready')
       }
 
-      const data = await response.text()
+      const data = await response.json()
       return data
     },
-    // TODO: add backoff timer ala sidekiq
+    // TODO: add backoff
     { retries: 5 },
   )
 }
